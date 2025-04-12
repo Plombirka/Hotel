@@ -21,6 +21,7 @@ class LoginForm(QWidget):
 
     def init_ui(self):
         self.setWindowTitle("Авторизация")
+        self.setFixedSize(400, 200)  # Фиксированный размер окна
         layout = QVBoxLayout()
 
         self.login_label = QLabel("Логин:")
@@ -114,6 +115,7 @@ class PasswordChangeForm(QWidget):
 
     def init_ui(self):
         self.setWindowTitle("Смена пароля")
+        self.setFixedSize(400, 300)  # Фиксированный размер окна
         layout = QVBoxLayout()
 
         self.current_password_label = QLabel("Текущий пароль:")
@@ -181,6 +183,7 @@ class AdminDashboard(QWidget):
 
     def init_ui(self):
         self.setWindowTitle("Панель администратора")
+        self.setFixedSize(800, 600)  # Фиксированный размер окна
         layout = QVBoxLayout()
 
         # Настройка таблицы
@@ -189,6 +192,7 @@ class AdminDashboard(QWidget):
         self.table.setHorizontalHeaderLabels(["ID", "Логин", "Пароль", "Роль", "Заблокирован", "Действия"])
         self.table.setAlternatingRowColors(True)  
         self.table.setStyleSheet("QTableWidget { gridline-color: #dcdcdc; }")  
+        self.table.horizontalHeader().setStretchLastSection(True)  # Растягиваем последнюю колонку
         layout.addWidget(self.table)
 
         self.add_user_button = QPushButton("Добавить пользователя")
@@ -203,8 +207,6 @@ class AdminDashboard(QWidget):
 
         self.setLayout(layout)
         self.load_users()
-
-        self.resize(self.table.horizontalHeader().length() + 50, 600)
 
     def load_users(self):
         conn = get_db_connection()
@@ -273,6 +275,7 @@ class AddUserForm(QWidget):
 
     def init_ui(self):
         self.setWindowTitle("Добавить пользователя")
+        self.setFixedSize(400, 300)  # Фиксированный размер окна
         layout = QVBoxLayout()
 
         self.login_label = QLabel("Логин:")
@@ -330,5 +333,4 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     login_form = LoginForm()
     login_form.show()
-    
     sys.exit(app.exec_())
